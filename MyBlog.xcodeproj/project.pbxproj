@@ -94,6 +94,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E175B1EF296CE05200C923DF /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1C198C6296B8E7F003F244B /* MainViewController.swift */,
+				E175B1F0296CE06000C923DF /* SubComponents */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		E175B1F0296CE06000C923DF /* SubComponents */ = {
+			isa = PBXGroup;
+			children = (
+				E175B1F1296CE06A00C923DF /* SearchBar */,
+				E175B1F2296CE07300C923DF /* BlogListView */,
+			);
+			path = SubComponents;
+			sourceTree = "<group>";
+		};
+		E175B1F1296CE06A00C923DF /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				E1C198C8296B8FAB003F244B /* SearchBar.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		E175B1F2296CE07300C923DF /* BlogListView */ = {
+			isa = PBXGroup;
+			children = (
+				E175B1F3296CE08D00C923DF /* SubComponents */,
+				E1C198CC296B98A0003F244B /* BlogList.swift */,
+			);
+			path = BlogListView;
+			sourceTree = "<group>";
+		};
+		E175B1F3296CE08D00C923DF /* SubComponents */ = {
+			isa = PBXGroup;
+			children = (
+				E1C198CA296B961F003F244B /* FilterView.swift */,
+				E1C198CE296B98BD003F244B /* BlogListCell.swift */,
+			);
+			path = SubComponents;
+			sourceTree = "<group>";
+		};
 		E1C1987D296B8C56003F244B = {
 			isa = PBXGroup;
 			children = (
@@ -148,11 +192,7 @@
 		E1C198D3296B98DA003F244B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E1C198C6296B8E7F003F244B /* MainViewController.swift */,
-				E1C198C8296B8FAB003F244B /* SearchBar.swift */,
-				E1C198CA296B961F003F244B /* FilterView.swift */,
-				E1C198CC296B98A0003F244B /* BlogList.swift */,
-				E1C198CE296B98BD003F244B /* BlogListCell.swift */,
+				E175B1EF296CE05200C923DF /* MainViewController */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";

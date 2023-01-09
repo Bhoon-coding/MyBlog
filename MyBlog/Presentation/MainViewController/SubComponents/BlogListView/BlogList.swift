@@ -33,7 +33,7 @@ class BlogListView: UITableView {
     }
     
     private func bind() {
-        cellData
+        cellData 
             .asDriver(onErrorJustReturn: [])
             .drive(self.rx.items) { tv, row, data in
                 let index = IndexPath(row: row, section: 0)
