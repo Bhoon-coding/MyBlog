@@ -13,7 +13,7 @@ class BlogListCell: UITableViewCell {
     let thumbnailImageView = UIImageView()
     let nameLabel = UILabel()
     let titleLabel = UILabel()
-    let datetimeLabel = UILabel()
+    let dateTimeLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -25,9 +25,9 @@ class BlogListCell: UITableViewCell {
         titleLabel.font = .systemFont(ofSize: 14)
         titleLabel.numberOfLines = 2
         
-        datetimeLabel.font = .systemFont(ofSize: 12, weight: .light)
+        dateTimeLabel.font = .systemFont(ofSize: 12, weight: .light)
         
-        [thumbnailImageView, nameLabel, titleLabel, datetimeLabel].forEach {
+        [thumbnailImageView, nameLabel, titleLabel, dateTimeLabel].forEach {
             contentView.addSubview($0)
         }
         
@@ -48,7 +48,7 @@ class BlogListCell: UITableViewCell {
             $0.trailing.equalTo(thumbnailImageView.snp.leading).offset(-8)
         }
         
-        datetimeLabel.snp.makeConstraints {
+        dateTimeLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalTo(nameLabel)
             $0.trailing.equalTo(titleLabel)
@@ -56,5 +56,19 @@ class BlogListCell: UITableViewCell {
         }
     }
     
+    func setData(_ data: BlogListCellData) {
+        thumbnailImageView.kf.setImage(with: data.thumbnailURL, placeholder: UIImage(systemName: "photo"))
+        nameLabel.text = data.name
+        titleLabel.text = data.title
+        
+        var dateTime: String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+            let contentDate = data.dateTime ?? Date()
+            
+            return dateFormatter.string(from: contentDate)
+        }
+        dateTimeLabel.text = dateTime
+    }
 }
 

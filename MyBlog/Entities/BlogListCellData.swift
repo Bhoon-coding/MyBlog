@@ -11,5 +11,5 @@ struct BlogListCellData {
     let thumbnailURL: URL?
     let name: String?
     let title: String?
-    let dateTime: Data?
+    let dateTime: Date?
 }
