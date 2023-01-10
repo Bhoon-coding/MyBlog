@@ -16,7 +16,7 @@ class SearchBar: UISearchBar {
     let searchButton = UIButton()
     
     //SearchBar 버튼 탭 이벤트
-    let searchButtonTapped = PublishSubject<Void>()
+    let searchButtonTapped = PublishRelay<Void>()
     
     //SearchBar 외부로 내보낼 이벤트
     var shouldLoadResult = Observable<String>.of("")
@@ -41,7 +41,7 @@ class SearchBar: UISearchBar {
             .disposed(by: disposeBag)
         
         searchButtonTapped
-            .asSignal() // asSignal 이없다
+            .asSignal()
             .emit(to: self.rx.endEditing)
             .disposed(by: disposeBag)
         

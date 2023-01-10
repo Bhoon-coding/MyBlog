@@ -15,6 +15,8 @@ class MainViewController: UIViewController {
     let searchBar = SearchBar()
     let listView = BlogListView()
     
+    let alertActionTapped = PublishRelay<AlertAction>()
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super .init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -28,10 +30,27 @@ class MainViewController: UIViewController {
     }
     
     private func bind() {
+        let alertSheetForSorting = listView.headerView.sortButtonTapped
+            .map { _ -> Alert in
+                return (title: nil,
+                        message: nil,
+                        actions: [.title, .dateTime, .cancel],
+                        style: .actionSheet)
+            }
         
+        alertSheetForSorting
+            .asSignal(onErrorSignalWith: .empty())
+            .flatMapLatest { alert -> Signal<AlertAction> in
+                let alertController = UIAlertController(title: alert.title,
+                                                        message: alert.message,
+                                                        preferredStyle: alert.style)
+                return self.presentAlertController(alertController,
+                                                   actions: alert.actions)
+            }
+            .emit(to: alertActionTapped)
+            .disposed(by: disposeBag)
     }
     
-    // TODO: [] view를 꾸미는 코드
     private func attribute() {
         title = "다음 블로그 검색"
         view.backgroundColor = .white
