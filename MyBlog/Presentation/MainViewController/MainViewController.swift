@@ -83,6 +83,24 @@ class MainViewController: UIViewController {
             }
             .startWith(.title)
         
+        // MainVC -> ListView
+        Observable
+            .combineLatest(
+                sortedType,
+                cellData
+            ) { type, data -> [BlogListCellData] in
+                switch type {
+                case .title:
+                    return data.sorted { $0.title ?? "" < $1.title ?? "" }
+                case .dateTime:
+                    return data.sorted { $0.dateTime ?? Date() > $1.dateTime ?? Date() }
+                default:
+                    return data
+                }
+            }
+            .bind(to: listView.cellData)
+            .disposed(by: disposeBag)
+        
         let alertSheetForSorting = listView.headerView.sortButtonTapped
             .map { _ -> Alert in
                 return (title: nil,
