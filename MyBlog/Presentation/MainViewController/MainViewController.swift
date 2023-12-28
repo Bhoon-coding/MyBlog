@@ -103,11 +103,35 @@ class MainViewController: UIViewController {
         
         let alertSheetForSorting = listView.headerView.sortButtonTapped
             .map { _ -> Alert in
-                return (title: nil,
-                        message: nil,
-                        actions: [.title, .dateTime, .cancel],
-                        style: .actionSheet)
+                return (title: nil, message: nil, actions: [.title, .dateTime, .cancel], style: .actionSheet)
             }
+        
+        let alertForErrorMessage = blogError
+            .map { message -> Alert in
+                return (
+                    title: "앗",
+                    message: "예상치 못한 오류가 발생했습니다. 잠시후 다시 시도해주세요. \(message)",
+                    actions: [.confirm],
+                    style: .alert
+                )
+            }
+        
+        Observable
+            .merge(
+                alertSheetForSorting,
+                alertForErrorMessage
+            )
+            .asSignal(onErrorSignalWith: .empty())
+            .flatMapLatest { alert -> Signal<AlertAction> in
+                let alertController = UIAlertController(
+                    title: alert.title,
+                    message: alert.message,
+                    preferredStyle: alert.style
+                )
+                return self.presentAlertController(alertController, actions: alert.actions)
+            }
+            .emit(to: alertActionTapped)
+            .disposed(by: disposeBag)
         
         alertSheetForSorting
             .asSignal(onErrorSignalWith: .empty())
