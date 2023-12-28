@@ -29,7 +29,60 @@ class MainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // TODO: [] 데이터처리하기 (0:40) 부터 시작
+    
     private func bind() {
+        let blogResult = searchBar.shouldLoadResult
+            .flatMapLatest { query in
+                SearchBlogNetwork().searchBlog(query: query)
+            }
+            .share() /// stream 공유
+        
+        /// stream 분리
+        let blogValue = blogResult
+            .compactMap { data -> DKBlog? in
+                guard case .success(let value) = data else {
+                    return nil
+                }
+                
+                return value
+            }
+        
+        let blogError = blogResult
+            .compactMap { data -> String? in
+                guard case .failure(let error) = data else {
+                    return nil
+                }
+                return error.localizedDescription
+            }
+        
+        // 네트워크를 통해 가져온 값을 cellData로 변환
+        let cellData = blogValue
+            .map { blog -> [BlogListCellData] in
+                return blog.documents
+                    .map { doc in
+                        let thumbnail = URL(string: doc.thumbnail ?? "")
+                        return BlogListCellData(
+                            thumbnailURL: thumbnail,
+                            name: doc.name,
+                            title: doc.title,
+                            dateTime: doc.datetime
+                        )
+                    }
+            }
+        
+        // FilterView를 선택했을 때 나오는 alertsheet를 선택했을 때 type
+        let sortedType = alertActionTapped
+            .filter {
+                switch $0 {
+                case .title, .dateTime:
+                    return true
+                default:
+                    return false
+                }
+            }
+            .startWith(.title)
+        
         let alertSheetForSorting = listView.headerView.sortButtonTapped
             .map { _ -> Alert in
                 return (title: nil,
