@@ -29,8 +29,6 @@ class MainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // TODO: [] 데이터처리하기 (0:40) 부터 시작
-    
     private func bind() {
         let blogResult = searchBar.shouldLoadResult
             .flatMapLatest { query in
@@ -145,6 +143,8 @@ class MainViewController: UIViewController {
             .emit(to: alertActionTapped)
             .disposed(by: disposeBag)
     }
+    
+    // TODO: [] 챕터7-2 다음블로그 검색 앱 리팩토링 들을 차례 (MVC > MVVM 리팩토링 작업예정)
     
     private func attribute() {
         title = "다음 블로그 검색"

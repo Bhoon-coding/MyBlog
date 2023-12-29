@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1600C2B2B3E4A580088E27B /* SearchBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1600C2A2B3E4A580088E27B /* SearchBarViewModel.swift */; };
 		E175B1F5296CE16200C923DF /* AlertActionConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175B1F4296CE16200C923DF /* AlertActionConvertible.swift */; };
 		E19D9A09296E37BE00B3A972 /* DKBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19D9A08296E37BE00B3A972 /* DKBlog.swift */; };
 		E19D9A0C296E3BE400B3A972 /* SearchBlogAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19D9A0B296E3BE400B3A972 /* SearchBlogAPI.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1600C2A2B3E4A580088E27B /* SearchBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewModel.swift; sourceTree = "<group>"; };
 		E175B1F4296CE16200C923DF /* AlertActionConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertActionConvertible.swift; sourceTree = "<group>"; };
 		E19D9A08296E37BE00B3A972 /* DKBlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKBlog.swift; sourceTree = "<group>"; };
 		E19D9A0B296E3BE400B3A972 /* SearchBlogAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBlogAPI.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				E1C198C8296B8FAB003F244B /* SearchBar.swift */,
+				E1600C2A2B3E4A580088E27B /* SearchBarViewModel.swift */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				E1C1988A296B8C56003F244B /* AppDelegate.swift in Sources */,
 				E1C198CB296B961F003F244B /* FilterView.swift in Sources */,
 				E1C1988C296B8C56003F244B /* SceneDelegate.swift in Sources */,
+				E1600C2B2B3E4A580088E27B /* SearchBarViewModel.swift in Sources */,
 				E19D9A0E296E3CDD00B3A972 /* SearchBlogNetwork.swift in Sources */,
 				E175B1F5296CE16200C923DF /* AlertActionConvertible.swift in Sources */,
 			);
