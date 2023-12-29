@@ -19,12 +19,9 @@ class BlogListView: UITableView {
         )
     )
     
-    let cellData = PublishSubject<[BlogListCellData]>()
-    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
-        bind()
         attribute()
     }
     
@@ -32,9 +29,8 @@ class BlogListView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func bind() {
-        cellData 
-            .asDriver(onErrorJustReturn: [])
+    func bind(_ viewModel: BlogListViewModel) {
+        viewModel.cellData
             .drive(self.rx.items) { tv, row, data in
                 let index = IndexPath(row: row, section: 0)
                 let cell = tv.dequeueReusableCell(withIdentifier: "BlogListCell", for: index) as! BlogListCell
